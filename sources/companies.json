@@ -1,0 +1,5 @@
+{
+  "_comment": "Optional: company career pages checked directly, bypassing aggregator lag. To add a company: visit its careers page; if it redirects to boards.greenhouse.io/<token> or jobs.lever.co/<token>, add <token> below. Bad/renamed tokens are skipped silently by the fetcher. Empty by default — add companies relevant to your own field.",
+  "greenhouse": [],
+  "lever": []
+}

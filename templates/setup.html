@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Set up — JobBuddy</title>
+<link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='logo.svg') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='setup.css') }}">
+</head>
+<body>
+
+<header class="setup-header">
+  <div class="setup-header-inner">
+    <div class="brand">
+      <img class="brand-mark" src="{{ url_for('static', filename='logo.svg') }}" alt="" width="28" height="28">
+      <span class="brand-name">JobBuddy</span>
+    </div>
+    <a id="backLink" href="/" class="btn btn-ghost btn-sm" style="display:none;">← Back to dashboard</a>
+  </div>
+</header>
+
+<main class="setup-shell">
+  <nav class="setup-nav">
+    <p class="setup-nav-title">Setup</p>
+    <a href="#sec-api" class="setup-nav-item" data-check="api"><span class="nav-dot"></span>API Key</a>
+    <a href="#sec-resume" class="setup-nav-item" data-check="resume"><span class="nav-dot"></span>Resume</a>
+    <a href="#sec-titles" class="setup-nav-item" data-check="titles"><span class="nav-dot"></span>Job Titles</a>
+    <a href="#sec-location" class="setup-nav-item" data-check="location"><span class="nav-dot"></span>Location &amp; Visa</a>
+    <a href="#sec-type" class="setup-nav-item" data-check="type"><span class="nav-dot"></span>Type &amp; Freshness</a>
+  </nav>
+
+  <div class="setup-content">
+    <div class="setup-intro">
+      <h1>Let's set this up</h1>
+      <p class="muted">These settings live only on this computer — never in the app's code — so this
+      same install can be shared without handing over your resume or API key. Come back to this page
+      anytime via the gear icon to change anything.</p>
+    </div>
+
+    <div class="sources-box">
+      <p class="sources-title">Where JobBuddy looks for jobs</p>
+      <ul class="sources-list">
+        <li><strong>Remotive</strong> — public remote-job board, no account needed</li>
+        <li><strong>Jobicy</strong> — public remote-job board, no account needed</li>
+        <li><strong>Himalayas</strong> — public remote-job board, no account needed</li>
+        <li><strong>We Work Remotely</strong> — public remote-job board, no account needed</li>
+        <li><strong>SimplyHired</strong> — scanned directly since it has no public listing feed; usually the richest source</li>
+        <li><strong>Adzuna</strong> (optional) — general job aggregator, enable it below</li>
+        <li><strong>Company career pages</strong> (optional) — specific companies you add yourself in
+          <code>sources/companies.json</code>, checked directly so their newest postings aren't missed</li>
+      </ul>
+      <p class="sources-note">Sites that actively block automated access — Monster, CareerBuilder — aren't
+      included, and FlexJobs is skipped since it requires a paid account to see full listings.</p>
+
+      <div class="adzuna-box">
+        <p class="adzuna-title">Enable Adzuna (optional)</p>
+        <p class="field-help">Free API key, instant signup at <strong>developer.adzuna.com</strong> — look
+        for "App ID" and "App Key" on your account page. Leave both blank to skip this source entirely.</p>
+        <div class="row" style="gap:10px; flex-wrap:wrap; margin-top:10px;">
+          <input class="input" type="text" id="adzunaAppId" placeholder="App ID" style="max-width:220px;">
+          <input class="input" type="password" id="adzunaAppKey" placeholder="App Key" style="max-width:280px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- API KEY -->
+    <section class="card setup-section" id="sec-api">
+      <div class="setup-section-head">
+        <h2>Anthropic API key</h2>
+        <p class="muted">Powers the "tailor resume to this job" feature. Job discovery itself is free and doesn't need this.</p>
+        <p class="cost-callout">💲 Approximate cost: <strong>$0.03–$0.08 per tailored resume</strong> (you're
+        charged once each time you click "Update resume according to this job role" on a job — searching,
+        browsing, and tracking jobs costs nothing). $5 of credit covers roughly 60-150 tailored resumes.</p>
+      </div>
+      <div class="field">
+        <label class="field-label">API key</label>
+        <div class="row" style="gap:8px;">
+          <input class="input" type="password" id="apiKeyInput" placeholder="sk-ant-...">
+          <button class="btn btn-secondary btn-sm" type="button" id="toggleKeyVisibility">Show</button>
+        </div>
+        <p class="field-help" id="apiKeyStatus"></p>
+      </div>
+
+      <div class="howto-box">
+        <p class="howto-title">Don't have a key yet? Here's how to get one:</p>
+        <ol class="howto-steps">
+          <li>Go to <strong>console.anthropic.com</strong> and sign up (or log in if you already have an account).</li>
+          <li>In the left sidebar, click <strong>API Keys</strong> (under Settings).</li>
+          <li>Click <strong>Create Key</strong>, give it any name (e.g. "JobBuddy"), and confirm.</li>
+          <li>Copy the key it shows you — it starts with <code>sk-ant-</code> and is only shown once, so copy it before closing that screen.</li>
+          <li>In the same sidebar, click <strong>Billing</strong> and add a small amount of credit (even $5 goes a long way — tailoring one resume costs only a few cents).</li>
+          <li>Paste the key into the field above and click "Save changes" at the bottom of this page.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- RESUME -->
+    <section class="card setup-section" id="sec-resume">
+      <div class="setup-section-head">
+        <h2>Your resume</h2>
+        <p class="muted">Uploaded as-is. Only summary lines and job bullets ever get rewritten — name, contact info, employer names, titles, and dates are never touched.</p>
+      </div>
+
+      <div class="field" style="margin-bottom:16px;">
+        <label class="field-label">Your name</label>
+        <input class="input" type="text" id="fullNameInput" placeholder="Jane Doe" style="max-width:320px;">
+        <p class="field-help">Used only to name the tailored resume files this app generates — never written into the resume content itself.</p>
+      </div>
+
+      <div class="dropzone" id="dropzone">
+        <input type="file" id="resumeFile" accept=".docx" hidden>
+        <div class="dropzone-icon">⇧</div>
+        <p><strong>Drop your resume here</strong> or click to browse</p>
+        <p class="faint" style="font-size:12.5px;">.docx only — bullet points should use Word's bullet-list formatting</p>
+      </div>
+
+      <div id="resumeCurrentRow" class="resume-current" style="display:none;">
+        <span class="badge badge-good">✓ Resume on file</span>
+        <button class="btn btn-ghost btn-sm" type="button" id="reparseBtn">Re-check structure</button>
+      </div>
+
+      <div id="structurePreview" class="structure-preview" style="display:none;"></div>
+    </section>
+
+    <!-- JOB TITLES -->
+    <section class="card setup-section" id="sec-titles">
+      <div class="setup-section-head">
+        <h2>Job titles</h2>
+        <p class="muted">A listing only ever shows up if its title matches one of your interested titles, and only if it doesn't match an excluded one.</p>
+      </div>
+
+      <div class="field" style="margin-bottom:20px;">
+        <label class="field-label">Interested in (required)</label>
+        <div class="tag-input" id="interestedTags" data-placeholder="e.g. Regulatory Affairs, Product Manager, Registered Nurse — press Enter after each"></div>
+        <p class="field-help">Type a title or keyword and press Enter. These also become the search terms sent to job boards.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Not interested in</label>
+        <div class="tag-input" id="excludedTags" data-placeholder="e.g. Director, VP, Senior Manager, Internship"></div>
+        <p class="field-help">Titles containing any of these are hidden, even if they'd otherwise match.</p>
+      </div>
+    </section>
+
+    <!-- LOCATION & VISA -->
+    <section class="card setup-section" id="sec-location">
+      <div class="setup-section-head">
+        <h2>Location &amp; work authorization</h2>
+        <p class="muted">This app defaults to the <strong>US job market</strong> — all of its built-in job
+        sources and matching logic are tuned around US-based remote listings. You can change the
+        target country below, but discovery quality outside the US hasn't been tested.</p>
+      </div>
+
+      <div class="row" style="gap:12px; margin-bottom:20px;">
+        <label class="switch"><input type="checkbox" id="remoteOnlyToggle"><span class="switch-track"></span></label>
+        <div>
+          <p style="font-weight:600; font-size:14px;">Remote only</p>
+          <p class="field-help">When on, onsite listings and remote-in-a-different-country listings are both hidden.</p>
+        </div>
+      </div>
+
+      <div class="field" style="margin-bottom:24px; max-width:320px;">
+        <label class="field-label">Country you're authorized to work in</label>
+        <input class="input" type="text" id="targetCountryInput" placeholder="United States">
+      </div>
+
+      <div class="field">
+        <label class="field-label">Work authorization</label>
+        <div class="choice-group" id="visaChoices"></div>
+      </div>
+    </section>
+
+    <!-- EMPLOYMENT TYPE -->
+    <section class="card setup-section" id="sec-type">
+      <div class="setup-section-head">
+        <h2>Employment type &amp; freshness</h2>
+      </div>
+
+      <div class="field" style="margin-bottom:24px;">
+        <label class="field-label">Open to</label>
+        <div class="row" style="gap:8px; flex-wrap:wrap;" id="employmentTypeChips"></div>
+        <p class="field-help">Listings with an undetectable employment type are always shown — this only excludes ones explicitly labeled otherwise.</p>
+      </div>
+
+      <div class="field" style="max-width:280px;">
+        <label class="field-label">Hide postings older than</label>
+        <select class="select" id="maxAgeSelect">
+          <option value="7">7 days</option>
+          <option value="14">14 days</option>
+          <option value="30">30 days</option>
+          <option value="90">90 days</option>
+        </select>
+      </div>
+    </section>
+
+    <div style="height:100px;"></div>
+  </div>
+</main>
+
+<div class="setup-actionbar">
+  <div class="setup-actionbar-inner">
+    <span class="muted" id="actionStatus"></span>
+    <span class="spacer"></span>
+    <button class="btn btn-amber" id="saveBtn" type="button">Save &amp; continue to dashboard</button>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="{{ url_for('static', filename='setup.js') }}"></script>
+</body>
+</html>

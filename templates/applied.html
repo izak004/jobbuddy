@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Applied Jobs — JobBuddy</title>
+<link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='logo.svg') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='applied.css') }}">
+</head>
+<body>
+<header class="app-header">
+  <div class="app-header-inner">
+    <div class="brand">
+      <img class="brand-mark" src="{{ url_for('static', filename='logo.svg') }}" alt="" width="30" height="30">
+      <span class="brand-name">JobBuddy</span>
+    </div>
+    <div class="header-actions">
+      <a href="/" class="btn btn-ghost btn-sm">← Back to dashboard</a>
+      <a href="/setup" class="btn btn-amber">⚙ Setup</a>
+    </div>
+  </div>
+</header>
+
+<main class="app-main">
+  <div class="applied-head">
+    <h1>Applied Jobs</h1>
+    <p class="muted">Your full application history, oldest and newest alike — sorted by the date you applied.</p>
+  </div>
+
+  <div class="card applied-table-wrap">
+    <table class="applied-table" id="appliedTable">
+      <thead>
+        <tr>
+          <th class="col-num">#</th>
+          <th>Job Title</th>
+          <th>Client</th>
+          <th>Date Applied</th>
+          <th>Resume Used</th>
+        </tr>
+      </thead>
+      <tbody id="appliedBody"></tbody>
+    </table>
+    <div id="appliedEmpty" class="empty-state" style="display:none; border:none; margin:0;">
+      <div class="empty-icon">◈</div>No applications tracked yet.<br>
+      Set a job's status to "Applied" from the dashboard and it'll show up here.
+    </div>
+  </div>
+</main>
+
+<script src="{{ url_for('static', filename='applied.js') }}"></script>
+</body>
+</html>

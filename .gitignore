@@ -1,0 +1,17 @@
+# Personal data — never committed. This is what makes the app shareable.
+data/
+*.docx
+!sample_data/*.docx
+
+# Environment / secrets
+.env
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+
+# Editor/OS cruft
+.vscode/
+.DS_Store
+Thumbs.db
