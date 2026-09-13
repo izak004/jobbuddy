@@ -22,7 +22,7 @@ from resume_parser import parse_resume_structure
 app = Flask(__name__)
 db.init_db()
 
-SETUP_EXEMPT_PATHS = {"/setup", "/api/settings", "/api/resume/upload", "/api/resume/structure"}
+SETUP_EXEMPT_PATHS = {"/setup", "/api/settings", "/api/resume/upload", "/api/resume/structure", "/api/check_update"}
 
 
 @app.before_request
