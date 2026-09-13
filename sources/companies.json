@@ -1,5 +1,15 @@
 {
-  "_comment": "Optional: company career pages checked directly, bypassing aggregator lag. To add a company: visit its careers page; if it redirects to boards.greenhouse.io/<token> or jobs.lever.co/<token>, add <token> below. Bad/renamed tokens are skipped silently by the fetcher. Empty by default — add companies relevant to your own field.",
+  "_comment": "Optional: company career pages checked directly, bypassing aggregator lag. To add a company, visit its careers page and see which ATS it redirects to: boards.greenhouse.io/<token>, jobs.lever.co/<token>, jobs.ashbyhq.com/<token>, <token>.recruitee.com, apply.workable.com/<token>, or <tenant>.<wdN>.myworkdayjobs.com/<site> for Workday (three parts, not just one token). Bad/renamed entries are skipped silently by the fetcher.",
   "greenhouse": [],
-  "lever": []
+  "lever": [],
+  "ashby": [],
+  "recruitee": [],
+  "workable": [],
+  "workday": [
+    {"tenant": "pfizer", "subdomain": "wd1", "site": "PfizerCareers", "name": "Pfizer"},
+    {"tenant": "sanofi", "subdomain": "wd3", "site": "SanofiCareers", "name": "Sanofi"},
+    {"tenant": "astrazeneca", "subdomain": "wd3", "site": "Careers", "name": "AstraZeneca"},
+    {"tenant": "msd", "subdomain": "wd5", "site": "SearchJobs", "name": "MSD"},
+    {"tenant": "propharmagroup", "subdomain": "wd1", "site": "ppgcareers", "name": "ProPharma Group"}
+  ]
 }

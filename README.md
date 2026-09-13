@@ -77,15 +77,21 @@ listings are waiting when you open the dashboard. Logs go to `data\fetch_log.txt
 ## What it does
 
 Every fetch pulls postings from:
-- **Remotive**, **Jobicy**, **Himalayas**, **We Work Remotely** — public remote-job aggregator
-  APIs/feeds, no key required
+- **Remotive**, **Jobicy**, **Himalayas**, **We Work Remotely**, **Working Nomads** — public
+  remote-job aggregator APIs/feeds, no key required
 - **SimplyHired** — scraped with a headless browser (Playwright), since it has no public API. In
   practice this is the richest single source. See "About the SimplyHired scraper" below.
 - **Adzuna** (optional) — general job aggregator; needs your own free API key from
   developer.adzuna.com, entered in Setup. Skipped entirely if not configured. Free tier is capped
   around 100 queries/month, so it runs one query per interested job title, not per page.
-- An optional curated list of **company Greenhouse & Lever boards** (`sources/companies.json`,
-  empty by default — add companies relevant to your own field)
+- **Company career pages** (`sources/companies.json`) — specific companies checked directly, so
+  their newest postings aren't missed waiting for an aggregator to pick them up. Supports six ATS
+  platforms: **Greenhouse, Lever, Ashby, Recruitee, Workable**, and **Workday**. Workday in
+  particular is what powers career sites for a lot of large enterprises (including much of big
+  pharma) that don't show up on Greenhouse/Lever at all — five real pharma companies (Pfizer,
+  Sanofi, AstraZeneca, MSD, ProPharma Group) are pre-configured as a starting example. Add your own
+  by visiting a company's careers page and checking which platform it redirects to — see the
+  comment at the top of `companies.json` for the exact URL patterns to look for.
 
 **Monster, CareerBuilder, and FlexJobs are intentionally not included.** Monster and CareerBuilder
 sit behind DataDome, an active anti-bot CAPTCHA service — getting past that requires evasion
@@ -163,8 +169,12 @@ and which resume version you used (or "Original resume" if you applied without t
   list, sponsorship-mention phrase list, and the country-alias table used for remote/location
   matching. Extend `COUNTRY_ALIASES` if your target country isn't already listed.
 - **`sources/companies.json`** — add companies relevant to your field. Visit a company's careers
-  page: if it redirects to `boards.greenhouse.io/<token>` or `jobs.lever.co/<token>`, add
-  `<token>` to the matching list. Bad or renamed tokens are skipped silently.
+  page and check which platform it redirects to: `boards.greenhouse.io/<token>`,
+  `jobs.lever.co/<token>`, `jobs.ashbyhq.com/<token>`, `<token>.recruitee.com`,
+  `apply.workable.com/<token>` — add the token to the matching list. Workday needs three parts
+  instead of one token: from a URL like `pfizer.wd1.myworkdayjobs.com/PfizerCareers`, that's
+  `{"tenant": "pfizer", "subdomain": "wd1", "site": "PfizerCareers", "name": "Pfizer"}`. Bad or
+  renamed entries are skipped silently.
 
 ## About the SimplyHired scraper
 

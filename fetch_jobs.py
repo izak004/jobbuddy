@@ -9,9 +9,15 @@ import sys
 import db
 import scoring
 import settings
-from sources import remotive, jobicy, greenhouse, lever, simplyhired, himalayas, weworkremotely, adzuna
+from sources import (
+    remotive, jobicy, greenhouse, lever, simplyhired, himalayas, weworkremotely, adzuna,
+    ashby, recruitee, workable, workday, workingnomads,
+)
 
-SOURCES = [remotive, jobicy, himalayas, weworkremotely, adzuna, greenhouse, lever, simplyhired]
+SOURCES = [
+    remotive, jobicy, himalayas, weworkremotely, workingnomads, adzuna,
+    greenhouse, lever, ashby, recruitee, workable, workday, simplyhired,
+]
 
 
 def run():
