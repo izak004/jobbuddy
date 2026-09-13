@@ -17,6 +17,7 @@
     </div>
     <div class="header-actions">
       <span id="stats" class="stats"></span>
+      <a id="updateBadge" class="badge badge-good" href="#" style="cursor:default;">✓ Up to date</a>
       <a href="/applied" class="btn btn-teal-soft btn-sm">✓ Applied Jobs</a>
       <button id="refreshBtn" class="btn btn-primary btn-sm">Refresh jobs</button>
       <button id="themeToggle" class="btn btn-ghost btn-sm" title="Toggle theme" type="button">◐</button>
@@ -68,6 +69,7 @@
 
 <div id="toast" class="toast"></div>
 
+<script src="{{ url_for('static', filename='update-check.js') }}"></script>
 <script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
 </html>

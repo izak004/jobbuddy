@@ -17,6 +17,7 @@
       <span class="brand-name">JobBuddy</span>
     </div>
     <div class="header-actions">
+      <a id="updateBadge" class="badge badge-good" href="#" style="cursor:default;">✓ Up to date</a>
       <a href="/" class="btn btn-ghost btn-sm">← Back to dashboard</a>
       <a href="/setup" class="btn btn-amber">⚙ Setup</a>
     </div>
@@ -49,6 +50,7 @@
   </div>
 </main>
 
+<script src="{{ url_for('static', filename='update-check.js') }}"></script>
 <script src="{{ url_for('static', filename='applied.js') }}"></script>
 </body>
 </html>

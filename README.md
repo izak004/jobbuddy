@@ -227,6 +227,16 @@ knowing:
 - **Visa-flag detection is a heuristic**, not legal advice. Use it to prioritize your reading time,
   not as a final filter.
 
+## Update notifications
+
+The **"Up to date" / "Update available"** badge in the header checks the `VERSION` file on this
+repo's `main` branch against the one installed locally — works the same whether you installed via
+`git clone` or a downloaded ZIP. It fails silently if GitHub is unreachable (offline, firewall,
+etc.) rather than showing an error. Clicking it when an update is available takes you to this
+repo; there's no auto-updater, so grabbing the update is the same as the original install —
+download the new ZIP, or `git pull` if you cloned it (either way, your `data/` folder and
+everything in it is untouched, since it's gitignored and lives outside what gets replaced).
+
 ## What never gets committed to version control
 
 `.gitignore` excludes `data/` (settings, resume, job database, tailored resumes) and any `.docx`

@@ -16,7 +16,10 @@
       <img class="brand-mark" src="{{ url_for('static', filename='logo.svg') }}" alt="" width="28" height="28">
       <span class="brand-name">JobBuddy</span>
     </div>
-    <a id="backLink" href="/" class="btn btn-ghost btn-sm" style="display:none;">← Back to dashboard</a>
+    <div class="row" style="gap:10px;">
+      <a id="updateBadge" class="badge badge-good" href="#" style="cursor:default;">✓ Up to date</a>
+      <a id="backLink" href="/" class="btn btn-ghost btn-sm" style="display:none;">← Back to dashboard</a>
+    </div>
   </div>
 </header>
 
@@ -212,6 +215,7 @@
 
 <div id="toast" class="toast"></div>
 
+<script src="{{ url_for('static', filename='update-check.js') }}"></script>
 <script src="{{ url_for('static', filename='setup.js') }}"></script>
 </body>
 </html>

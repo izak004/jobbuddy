@@ -16,6 +16,7 @@ import config
 import db
 import resume_tailor
 import settings
+import update_check
 from resume_parser import parse_resume_structure
 
 app = Flask(__name__)
@@ -181,6 +182,11 @@ def api_update_job(job_id):
 @app.route("/api/stats")
 def api_stats():
     return jsonify(db.stats())
+
+
+@app.route("/api/check_update")
+def api_check_update():
+    return jsonify(update_check.check_for_update())
 
 
 def _clean_description(raw_html):
